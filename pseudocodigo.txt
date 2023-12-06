@@ -1,3 +1,53 @@
 /*
+ANDRÉS FERNÁNDEZ - CI 4.859.574-0
 
+SISTEMAS OPERATIVOS - OBLIGATORIO
+06/12/2023
 */
+
+
+
+// PSEUDOCÓDIGO DE COCINEROS
+
+nuevo entero platosDia = 0
+nuevo entero mostradorLibre = 27
+
+FUNCIÓN cocinero(id) retorna vacío
+
+    MIENTRAS (platosDia + id) < 180 HACER
+
+        P(cocinar_sem)
+
+            SI mostradorLibre > 0 HACER
+
+                platosDia++
+                mostradorLibre--
+
+            FIN SI
+
+        V(cocinar_sem)
+
+    FIN MIENTRAS
+FIN FUNCIÓN
+
+FUNCIÓN principal() retorna  entero
+    INIT(cocinar_sem, 0, 1)
+    nuevo entero cocineros = 3
+
+    tid[cocineros] // array de hilos, tamaño de cantidad de cocineros
+
+    PARA cada elemento en i(0,cocineros) HACER
+        nuevo entero puntero id = i
+        creo_hilo(tid[i], proceso cocinero, parámetro id)
+        ejecutar_hilo[i]
+    FIN PARA
+
+    destruir_semáforo(cocinar_sem)
+
+    retorna 0
+FIN FUNCIÓN
+
+
+
+// PSEUDOCÓDIGO de REPOSTERO
+
