@@ -21,9 +21,9 @@ void *cocinero(void *arg) { // defino el proceso de cada cocinero, como puntero
             platosDia++; // aumento la cantidad de platos cocinados hoy
             mostradorLibre--; // disminuyo el espacio libre en el mostrador
         }
-        sem_post(&cocinarSem);
+        sem_post(&cocinarSem); // libero el semáforo
     }
-    pthread_exit(NULL); // salgo del thread
+    pthread_exit(NULL); // salgo del thread al terminar el día
 }
 
 int main() {

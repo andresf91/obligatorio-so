@@ -36,7 +36,7 @@ FUNCIÓN principal() retorna  entero
 
     tid[cocineros] // array de hilos, tamaño de cantidad de cocineros
 
-    PARA cada elemento en i(0,cocineros) HACER
+    PARA cada elemento en i(0, cocineros-1) HACER
         nuevo entero puntero id = i
         creo_hilo(tid[i], proceso cocinero, parámetro id)
         ejecutar_hilo[i]
@@ -49,5 +49,100 @@ FIN FUNCIÓN
 
 
 
+
+
 // PSEUDOCÓDIGO de REPOSTERO
 
+FUNCIÓN principal() retorna entero
+
+    INIT(hacerPostresSem, 0, 1)
+    nuevo entero flanesHeladera=25
+    nuevo entero check=flanesHeladera
+    nuevo entero i
+
+    MIENTRAS 1 HACER
+
+        MIENTRAS check>0 HACER
+
+            P(hacerPostresSem)
+            check=flanesHeladera
+            V(hacerPostresSem)
+
+        FIN MIENTRAS
+
+        PARA cada elemento en i(1,25) HACER
+
+            P(hacerPostresSem)
+            flanesHeladera++
+            V(hacerPostresSem)
+
+        FIN PARA
+
+        check=flanesHeladera
+
+    FIN MIENTRAS
+
+    retornar 0
+
+FIN FUNCIÓN
+
+
+
+
+
+
+// PSEUDOCÓDIGO DE MOZOS
+
+nuevo entero platosDia = 0
+nuevo entero flanesHeladera=25
+nuevo entero platosMostrador = 0
+
+FUNCIÓN mozo (id) retorna vacío
+
+    nuevo entero pedido
+
+    MIENTRAS (platosDia + id) > 180
+
+        pedido = generarNúmeroAleatorioEntre(0, 1)
+
+        SI pedido==0
+            P(servirSem)
+            SI platosMostrador>3
+                platosMostrador = platosMostrador - 4
+            FIN SI
+            V(servirSem)
+        FIN SI
+        SINO
+            P(servirSem)
+            SI flanesHeladera>5
+                flanesHeladera = flanesHeladera - 6
+            FIN SI
+            V(servirSem)
+        FIN SINO
+
+    FIN MIENTRAS
+
+FIN FUNCIÓN
+
+FUNCIÓN principal retorna entero
+
+    INIT(servirSem, 0, 1)
+
+    nuevo entero mozos = 5
+    nuevo entero i
+
+    tid[mozos] // array de hilos, tamaño de cantidad de mozos
+
+    PARA cada elemento en i(0, mozos-1) HACER
+
+        nuevo entero puntero id = i
+        creo_hilo(tid[i], proceso mozo, parámetro id)
+        ejecutar_hilo[i]
+
+    FIN PARA
+
+    destruir_semáforo(servirSem)
+
+    retornar 0
+
+FIN FUNCIÓN
