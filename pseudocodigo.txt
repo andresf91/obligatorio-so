@@ -16,7 +16,7 @@ FUNCIÓN cocinero(id) retorna vacío
 
     MIENTRAS (platosDia + id) < 180 HACER
 
-        P(cocinar_sem)
+        P(cocinarSem)
 
             SI mostradorLibre > 0 HACER
 
@@ -25,13 +25,13 @@ FUNCIÓN cocinero(id) retorna vacío
 
             FIN SI
 
-        V(cocinar_sem)
+        V(cocinarSem)
 
     FIN MIENTRAS
 FIN FUNCIÓN
 
 FUNCIÓN principal() retorna  entero
-    INIT(cocinar_sem, 0, 1)
+    INIT(cocinarSem, 0, 1)
     nuevo entero cocineros = 3
 
     tid[cocineros] // array de hilos, tamaño de cantidad de cocineros
@@ -42,7 +42,7 @@ FUNCIÓN principal() retorna  entero
         ejecutar_hilo[i]
     FIN PARA
 
-    destruir_semáforo(cocinar_sem)
+    destruir_semáforo(cocinarSem)
 
     retorna 0
 FIN FUNCIÓN
